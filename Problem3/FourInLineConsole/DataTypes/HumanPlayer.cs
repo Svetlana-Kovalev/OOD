@@ -7,6 +7,7 @@ namespace FourInLineConsole.DataTypes
         public HumanPlayer(string name)
         {
             Name = name;
+            Email = null;
         }
 
         #region IPlayer
