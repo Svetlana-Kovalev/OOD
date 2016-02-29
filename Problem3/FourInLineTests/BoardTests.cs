@@ -163,8 +163,22 @@ namespace FourInLineTests
         [Test]
         public void BoardIsFull()
         {
-            Board board = new Board();
+            IBoard board = new Board(3, 2);
+            Assert.That(board.Rows, Is.EqualTo(3));
+            Assert.That(board.Columns, Is.EqualTo(2));
             Assert.That(board.BoardIsFull(), Is.False);
+
+            IPlayer player1 = new HumanPlayer("1");
+            board.PlaceDisk(player1, 0);
+            board.PlaceDisk(player1, 0);
+            board.PlaceDisk(player1, 0);
+
+            board.PlaceDisk(player1, 1);
+            board.PlaceDisk(player1, 1);
+            Assert.That(board.BoardIsFull(), Is.False);
+
+            board.PlaceDisk(player1, 1);
+            Assert.That(board.BoardIsFull(), Is.True);
         }
     }
 }

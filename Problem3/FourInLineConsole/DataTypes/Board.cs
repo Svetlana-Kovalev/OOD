@@ -19,6 +19,14 @@ namespace FourInLineConsole.DataTypes
             Clear();
         }
 
+        public Board(int rows, int cols)
+        {
+            Rows = rows;
+            Columns = cols;
+            m_board = InitBoard();
+            Clear();         
+        }
+
         private IPlayer[][] InitBoard()
         {            
             IPlayer[][] board = new IPlayer[Rows][];
