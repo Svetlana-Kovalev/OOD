@@ -176,9 +176,11 @@ namespace FourInLineTests
             board.PlaceDisk(player1, 1);
             board.PlaceDisk(player1, 1);
             Assert.That(board.BoardIsFull(), Is.False);
+            Assert.That(board.Status, Is.EqualTo(BoardStatus.Active));
 
             board.PlaceDisk(player1, 1);
             Assert.That(board.BoardIsFull(), Is.True);
+            Assert.That(board.Status, Is.EqualTo(BoardStatus.Full));
         }
     }
 }
