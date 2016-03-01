@@ -78,5 +78,66 @@ The approach satisfies SOLID principles: [Open/Closed principle] (https://en.wik
 
 >4 The system should optimize memory usage. Pick up the one aspect of your design that has the best ratio in terms of memory saving (no >need to produce a fully optimized design).
 
->5 It should be possible inform each user when it is his/her turn (by email/sms...)
+**TBD**
 
+>5 It should be possible inform each user when it is his/her turn (by email/sms...)
+For different notifications and transform changes from "game engine" declared interfaces
+```c#
+    public interface INotificationEvent
+    {
+        
+    }
+    public interface INotificationService
+    {
+        void RaiseEvent(INotificationEvent notificationEvent);
+    }
+```
+and classes
+```c#
+    public class ChangedUserEvent : INotificationEvent
+    {
+        public IPlayer Player { get; set; }
+        public ChangedUserEvent(IPlayer player)
+        {
+            Player = player;
+        }
+    }
+
+    public class NotificationService : INotificationService
+    {
+        ...
+
+        public NotificationService(...)
+        {
+           ...
+        }
+
+        #region INotificationService
+        public void RaiseEvent(INotificationEvent notificationEvent)
+        {
+            ChangedUserEvent userEvent = notificationEvent as ChangedUserEvent;
+            if (userEvent != null)
+            {
+                ...
+            }
+        }
+        #endregion
+    }
+```
+
+Game engine (class GameContainer) with help of INotificationService informs about changing a player's turn:
+```c#
+        private void ChangePlayer()
+        {
+            m_activeStrategy = m_activeStrategy == m_strategyPlayer1 ? m_strategyPlayer2 : m_strategyPlayer1;
+            OnChanged(new ChangedUserEvent(m_activeStrategy.Player));
+        }
+        protected virtual void OnChanged(INotificationEvent notificationEvent)
+        {
+            if (m_notificationService != null)
+            {
+                m_notificationService.RaiseEvent(notificationEvent);
+            }
+        }
+```
+Class NotificationService implements relevant actio for the notification.
