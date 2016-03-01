@@ -1,4 +1,3 @@
-using System;
 using FourInLineConsole.DataTypes;
 using FourInLineConsole.Interfaces.Player;
 using NUnit.Framework;
