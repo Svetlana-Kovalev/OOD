@@ -20,4 +20,23 @@ namespace FourInLineConsole.DataTypes
         }
         #endregion
     }
+
+    public class FileLoggerFactory : ILoggerFactory
+    {
+        private readonly IGameInfrastructure m_infrastructure;
+
+        public FileLoggerFactory(IGameInfrastructure infrastructure)
+        {
+            m_infrastructure = infrastructure;
+        }
+
+        #region ILoggerFactory
+        public ILogger Create()
+        {
+            ILogger logger = new FileLogger(Path.Combine(m_infrastructure.AssemblyDirectory, "FourInLine.log"));
+            return logger;            
+        }
+
+        #endregion
+    }
 }

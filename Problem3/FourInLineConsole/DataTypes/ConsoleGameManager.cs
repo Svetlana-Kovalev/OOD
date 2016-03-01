@@ -14,11 +14,11 @@ namespace FourInLineConsole.DataTypes
     
         private IBoardViewer m_boardViewer;
         private IGameContainer m_gameContainer;
-        private ILogger m_logger;
+        private readonly ILogger m_logger;
 
-        public ConsoleGameManager()
+        public ConsoleGameManager(ILoggerFactory loggerFactory)
         {
-            m_logger = new FileLogger(Path.Combine(Infrastructure.AssemblyDirectory, "FourInLine.log"));
+            m_logger = loggerFactory.Create();
             m_logger.Info("created at {0}", DateTime.Now);
         }
 

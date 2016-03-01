@@ -1,12 +1,13 @@
 using System;
 using System.IO;
 using System.Reflection;
+using FourInLineConsole.Interfaces;
 
 namespace FourInLineConsole.Infra
 {
-    public class Infrastructure
+    public class Infrastructure : IGameInfrastructure
     {
-        public static string AssemblyDirectory
+        public string AssemblyDirectory
         {
             get
             {
