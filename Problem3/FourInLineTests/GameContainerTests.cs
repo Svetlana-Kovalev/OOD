@@ -21,7 +21,7 @@ namespace FourInLineTests
             IGame game = new Game(board, player1, player2);
             IStrategy strategy1 = new HumanConsoleStrategy(game, player1);
             IStrategy strategy2 = new HumanConsoleStrategy(game, player2);
-            IGameContainer gameContainer = new GameContainer(game, strategy1, strategy2);
+            IGameContainer gameContainer = new GameContainer(game, strategy1, strategy2, null);
 
             Assert.That(gameContainer.GetGame(), Is.SameAs(game));
             Assert.That(gameContainer.GetActiveStrategy(), Is.SameAs(strategy1));
@@ -45,7 +45,7 @@ namespace FourInLineTests
 
             IStrategy strategy1 = mock1.Object; //new HumanConsoleStrategy(game, player1);
             IStrategy strategy2 = mock2.Object; //new HumanConsoleStrategy(game, player2);
-            IGameContainer gameContainer = new GameContainer(game, strategy1, strategy2);
+            IGameContainer gameContainer = new GameContainer(game, strategy1, strategy2, null);
 
             gameContainer.NextStep();
 
