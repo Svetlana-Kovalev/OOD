@@ -35,5 +35,6 @@ namespace FourInLineTests
             Assert.That(game.Status, Is.Not.Null);
             mock.VerifyGet(foo => foo.Status);
         }
+
     }
 }
