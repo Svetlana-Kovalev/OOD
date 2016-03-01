@@ -141,4 +141,4 @@ Game engine (class GameContainer) with help of INotificationService informs abou
             }
         }
 ```
-Class NotificationService implements relevant actio for the notification.
+Class NotificationService implements relevant action (sending email or SMS) for the notification.
