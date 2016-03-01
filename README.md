@@ -149,3 +149,12 @@ Class NotificationService implements relevant action (sending email or SMS) for 
 **Diagram of data types**
 ![Diagram of data types](https://github.com/Svetlana-Kovalev/OOD/blob/master/Problem3/Pictures/DataTypes%20Dependencies%20Graph.png)
 
+**Unit testing**
+
+Unit tests implemented in separated project **FourInLineTests** with help of several "test" frameworks:
+* [NUnit, "unit-testing framework for all .Net languages. Initially ported from JUnit"] (http://nunit.org/)
+* [Moq,  "The most popular and friendly mocking framework for .NET"] (https://github.com/Moq/moq4)
+
+NUnit allows to code tests with help of attributes and different ```c#Assert``` methods. Frameowrk moq
+
+**Aspects**
