@@ -155,6 +155,9 @@ Unit tests implemented in separated project **FourInLineTests** with help of sev
 * [NUnit, "unit-testing framework for all .Net languages. Initially ported from JUnit"] (http://nunit.org/)
 * [Moq,  "The most popular and friendly mocking framework for .NET"] (https://github.com/Moq/moq4)
 
-NUnit allows to code tests with help of attributes and different ```c#Assert``` methods. Frameowrk moq
+Moq allows to create required environment for unit testing without implementation "mock" classes or configure real classes.
+In several cases, added possibility to define settings of real classes, which uses by tests only. For example, added additional constructor of class Board ```c#public Board(int rows, int cols)```, which allows to create "small" actual board and use it for tests.
+
+**TBD** It's necessary to add picture with "coverage" report.
 
 **Aspects**
