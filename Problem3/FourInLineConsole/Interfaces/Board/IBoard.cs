@@ -1,5 +1,4 @@
-﻿using System;
-using FourInLineConsole.Interfaces.Player;
+﻿using FourInLineConsole.Interfaces.Player;
 
 namespace FourInLineConsole.Interfaces.Board
 {
