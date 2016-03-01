@@ -82,6 +82,7 @@ The approach satisfies SOLID principles: [Open/Closed principle] (https://en.wik
 
 >5 It should be possible inform each user when it is his/her turn (by email/sms...)
 For different notifications and transform changes from "game engine" declared interfaces
+
 ```c#
     public interface INotificationEvent
     {
