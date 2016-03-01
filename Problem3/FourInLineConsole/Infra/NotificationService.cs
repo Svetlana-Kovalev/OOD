@@ -1,4 +1,3 @@
-using System;
 using FourInLineConsole.Interfaces.Infra;
 using FourInLineConsole.Interfaces.Player;
 
@@ -15,15 +14,22 @@ namespace FourInLineConsole.Infra
 
     public class NotificationService : INotificationService
     {
+        private readonly IGameConsole m_gameConsole;
+
+        public NotificationService(IGameConsole gameConsole)
+        {
+            m_gameConsole = gameConsole;
+        }
+
         #region INotificationService
         public void RaiseEvent(INotificationEvent notificationEvent)
         {
-            if (notificationEvent is ChangedUserEvent)
+            ChangedUserEvent userEvent = notificationEvent as ChangedUserEvent;
+            if (userEvent != null)
             {
-                Console.WriteLine("Send notification to player '{0}'.", ((ChangedUserEvent) notificationEvent).Player.Name);
+                m_gameConsole.WriteLine("Send notification to player '{0}'.", userEvent.Player.Name);
             }
         }
-
         #endregion
     }
 }
