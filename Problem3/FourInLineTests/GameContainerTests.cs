@@ -1,4 +1,5 @@
 using FourInLineConsole.DataTypes;
+using FourInLineConsole.Infra;
 using FourInLineConsole.Interfaces;
 using FourInLineConsole.Interfaces.Board;
 using FourInLineConsole.Interfaces.Player;
@@ -19,8 +20,8 @@ namespace FourInLineTests
             IHumanPlayer player2 = new HumanPlayer("2");
 
             IGame game = new Game(board, player1, player2);
-            IStrategy strategy1 = new HumanConsoleStrategy(game, player1);
-            IStrategy strategy2 = new HumanConsoleStrategy(game, player2);
+            IStrategy strategy1 = new HumanConsoleStrategy(game, player1, new GameConsole());
+            IStrategy strategy2 = new HumanConsoleStrategy(game, player2, new GameConsole());
             IGameContainer gameContainer = new GameContainer(game, strategy1, strategy2, null);
 
             Assert.That(gameContainer.GetGame(), Is.SameAs(game));

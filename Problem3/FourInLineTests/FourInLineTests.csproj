@@ -51,6 +51,7 @@
     <Compile Include="ComputerStandardStrategyTests.cs" />
     <Compile Include="GameContainerTests.cs" />
     <Compile Include="GameTests.cs" />
+    <Compile Include="HumanStrategyTests.cs" />
     <Compile Include="PlayerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
