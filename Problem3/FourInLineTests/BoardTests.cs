@@ -146,7 +146,6 @@ namespace FourInLineTests
         }
         
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void IsWinTests_IncorrectArgument()
         {
             int WIN_COUNT = 4;
@@ -157,7 +156,7 @@ namespace FourInLineTests
             board.PlaceDisk(playerWin, 0);
             board.PlaceDisk(playerWin, 0);
             board.PlaceDisk(playerWin, 0);
-            Assert.That(board.IsWin(ROW_COUNT - WIN_COUNT+1 , 0, playerWin), Is.True);
+            Assert.Throws<ArgumentException>(() => board.IsWin(ROW_COUNT - WIN_COUNT + 1, 0, playerWin));
         }
 
         [Test]
