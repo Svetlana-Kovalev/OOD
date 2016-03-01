@@ -10,6 +10,7 @@ namespace FourInLineConsole.DataTypes
     public class ConsoleGameManager : IGameManager
     {
         private readonly INotificationService m_notificationService;
+        private readonly IGameConsole m_gameConsole;
         // the main menu
         public enum UserChoice { QUIT, PLAY, PLAYCOMPUTER };
     
@@ -17,9 +18,10 @@ namespace FourInLineConsole.DataTypes
         private IGameContainer m_gameContainer;
         private readonly ILogger m_logger;
 
-        public ConsoleGameManager(ILoggerFactory loggerFactory, INotificationService notificationService)
+        public ConsoleGameManager(ILoggerFactory loggerFactory, INotificationService notificationService, IGameConsole gameConsole)
         {
             m_notificationService = notificationService;
+            m_gameConsole = gameConsole;
             m_logger = loggerFactory.Create();
             m_logger.Info("created at {0}", DateTime.Now);
         }
@@ -38,8 +40,8 @@ namespace FourInLineConsole.DataTypes
                     IHumanPlayer humanPlayer1 = new HumanPlayer("1");
                     IHumanPlayer humanPlayer2 = new HumanPlayer("2");
                     IGame game = new Game(new Board(), humanPlayer1, humanPlayer2);
-                    IStrategy strategy1 = new HumanConsoleStrategy(game, humanPlayer1);
-                    IStrategy strategy2 = new HumanConsoleStrategy(game, humanPlayer2);
+                    IStrategy strategy1 = new HumanConsoleStrategy(game, humanPlayer1, m_gameConsole);
+                    IStrategy strategy2 = new HumanConsoleStrategy(game, humanPlayer2, m_gameConsole);
                     m_gameContainer = new GameContainer(game, strategy1, strategy2, m_notificationService);                    
                     break;
                 case UserChoice.PLAYCOMPUTER:
@@ -47,7 +49,7 @@ namespace FourInLineConsole.DataTypes
                     IComputerPlayer computerplayer = new ComputerPlayer();
 
                     game = new Game(new Board(), humanPlayer, computerplayer);
-                    strategy1 = new HumanConsoleStrategy(game, humanPlayer);
+                    strategy1 = new HumanConsoleStrategy(game, humanPlayer, m_gameConsole);
                     strategy2 = new ComputerStandardStrategy(game, computerplayer, humanPlayer);
                     m_gameContainer = new GameContainer(game, strategy1, strategy2, m_notificationService);
                     break;
