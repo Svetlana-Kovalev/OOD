@@ -25,7 +25,7 @@ namespace FourInLineConsole.DataTypes
         }
         public IStrategy GetStrategyPlayer1() {  return m_strategyPlayer1;}
         public IStrategy GetStrategyPlayer2() {  return m_strategyPlayer2;}
-        public IStrategy GetLastStep() { return m_activeStrategy; }
+        public IStrategy GetLastStep() { return m_lastStep; }
         public IStrategy GetActiveStrategy() { return m_activeStrategy; }
         public void NextStep()
         {
