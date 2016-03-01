@@ -24,7 +24,7 @@ and more specific IHumanPlayer and
         
     }    
 ```
-The interfaces contain relevant information only and relevant classes can be created by relevant factory. Different factory can retrieve player's information from external sources (different UI, social networks, etc.). The approach allows to add new possibilities without chnages of existing classes, but by implementation new classes ([Open/Closed Principle](https://en.wikipedia.org/wiki/Open/closed_principle)).
+The interfaces contain relevant information only and relevant classes can be created by relevant factory. Different factory can retrieve player's information from external sources (different UI, social networks, etc.). The approach allows to add new possibilities without chnages of existing classes, but by implementation new classes ([Open/Closed Principle](https://en.wikipedia.org/wiki/Open/closed_principle)). So, when it's necessary to take player's information from new social netwotk, will be implemented new factory, that will take the information and create existing player class by the data.
 
 >2.	It may be required to display the board UI in various representations
 
