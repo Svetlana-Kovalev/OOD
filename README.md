@@ -142,3 +142,6 @@ Game engine (class GameContainer) with help of INotificationService informs abou
         }
 ```
 Class NotificationService implements relevant action (sending email or SMS) for the notification.
+
+**Diagram of interfaces**
+![Diagram of interfaces](https://github.com/Svetlana-Kovalev/OOD/blob/master/Problem3/Pictures/Dependencies%20Graph.png)
