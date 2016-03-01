@@ -156,8 +156,44 @@ Unit tests implemented in separated project **FourInLineTests** with help of sev
 * [Moq,  "The most popular and friendly mocking framework for .NET"] (https://github.com/Moq/moq4)
 
 Moq allows to create required environment for unit testing without implementation "mock" classes or configure real classes.
-In several cases, added possibility to define settings of real classes, which uses by tests only. For example, added additional constructor of class Board ```c#public Board(int rows, int cols)```, which allows to create "small" actual board and use it for tests.
+In several cases, added possibility to define settings of real classes, which uses by tests only. For example, added additional constructor of class Board **public Board(int rows, int cols)**, which allows to create "small" actual board and use it for tests.
 
 **TBD** It's necessary to add picture with "coverage" report.
 
 **Aspects**
+
+Dynamic proxy implemented in class **public class Wrapper<T> : DynamicObject**. 
+The class with help of framework ImpromptuInterface create dynamic proxy.
+Method **TryInvokeMember** catches calling of method **NextStep()** and stores to logger duration of the method.
+
+```c#
+        public override bool TryInvokeMember(InvokeMemberBinder binder, object[] args, out object result)
+        {
+            try
+            {
+                bool nextStepMethod = binder.Name.ToLower() == "nextstep";
+
+                Stopwatch stopWatch = new Stopwatch();
+                if (nextStepMethod)
+                {
+                    stopWatch.Start();
+                }
+
+                //call _wrappedObject object
+                result = m_wrappedObject.GetType().GetMethod(binder.Name).Invoke(m_wrappedObject, args);
+
+                if (nextStepMethod)
+                {
+                    stopWatch.Stop();
+                    TimeSpan ts = stopWatch.Elapsed;
+                    m_logger.Info("elapsed time: player={0}, duration = {1} ms", m_gameGameContainer.GetLastStep().Player.Name, ts.TotalMilliseconds);
+                }
+                return true;
+            }
+            catch
+            {
+                result = null;
+                return false;
+            }
+        }
+```
