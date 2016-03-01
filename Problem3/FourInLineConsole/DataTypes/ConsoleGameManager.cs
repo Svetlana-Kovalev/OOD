@@ -1,14 +1,15 @@
 ﻿using System;
-using System.IO;
 using FourInLineConsole.Infra;
 using FourInLineConsole.Interfaces;
 using FourInLineConsole.Interfaces.Board;
+using FourInLineConsole.Interfaces.Infra;
 using FourInLineConsole.Interfaces.Player;
 
 namespace FourInLineConsole.DataTypes
 {    
     public class ConsoleGameManager : IGameManager
     {
+        private readonly INotificationService m_notificationService;
         // the main menu
         public enum UserChoice { QUIT, PLAY, PLAYCOMPUTER };
     
@@ -16,8 +17,9 @@ namespace FourInLineConsole.DataTypes
         private IGameContainer m_gameContainer;
         private readonly ILogger m_logger;
 
-        public ConsoleGameManager(ILoggerFactory loggerFactory)
+        public ConsoleGameManager(ILoggerFactory loggerFactory, INotificationService notificationService)
         {
+            m_notificationService = notificationService;
             m_logger = loggerFactory.Create();
             m_logger.Info("created at {0}", DateTime.Now);
         }
@@ -38,7 +40,7 @@ namespace FourInLineConsole.DataTypes
                     IGame game = new Game(new Board(), humanPlayer1, humanPlayer2);
                     IStrategy strategy1 = new HumanConsoleStrategy(game, humanPlayer1);
                     IStrategy strategy2 = new HumanConsoleStrategy(game, humanPlayer2);
-                    m_gameContainer = new GameContainer(game, strategy1, strategy2);
+                    m_gameContainer = new GameContainer(game, strategy1, strategy2, m_notificationService);                    
                     break;
                 case UserChoice.PLAYCOMPUTER:
                     IHumanPlayer humanPlayer = new HumanPlayer("1");
@@ -47,7 +49,7 @@ namespace FourInLineConsole.DataTypes
                     game = new Game(new Board(), humanPlayer, computerplayer);
                     strategy1 = new HumanConsoleStrategy(game, humanPlayer);
                     strategy2 = new ComputerStandardStrategy(game, computerplayer, humanPlayer);
-                    m_gameContainer = new GameContainer(game, strategy1, strategy2);
+                    m_gameContainer = new GameContainer(game, strategy1, strategy2, m_notificationService);
                     break;
                 default:
                     throw new ArgumentException(String.Format("Unexpected userChoice {0}", userChoice));

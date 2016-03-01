@@ -1,4 +1,6 @@
-﻿namespace FourInLineConsole.Interfaces
+﻿using System;
+
+namespace FourInLineConsole.Interfaces
 {
     public interface IGameManager
     {

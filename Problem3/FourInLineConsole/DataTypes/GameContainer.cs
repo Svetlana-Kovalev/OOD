@@ -1,5 +1,7 @@
-﻿using FourInLineConsole.Interfaces;
+﻿using FourInLineConsole.Infra;
+using FourInLineConsole.Interfaces;
 using FourInLineConsole.Interfaces.Board;
+using FourInLineConsole.Interfaces.Infra;
 
 namespace FourInLineConsole.DataTypes
 {
@@ -8,13 +10,15 @@ namespace FourInLineConsole.DataTypes
         private readonly IGame m_game;
         private readonly IStrategy m_strategyPlayer1;
         private readonly IStrategy m_strategyPlayer2;
+        private readonly INotificationService m_notificationService;
         private IStrategy m_activeStrategy;
         private IStrategy m_lastStep;
-        public GameContainer(IGame game, IStrategy strategy1, IStrategy strategy2)
+        public GameContainer(IGame game, IStrategy strategy1, IStrategy strategy2, INotificationService notificationService)
         {
             m_game = game;
             m_strategyPlayer1 = strategy1;
             m_strategyPlayer2 = strategy2;
+            m_notificationService = notificationService;
             m_activeStrategy = m_strategyPlayer1;
             m_lastStep = null;
         }
@@ -29,10 +33,7 @@ namespace FourInLineConsole.DataTypes
         public IStrategy GetActiveStrategy() { return m_activeStrategy; }
         public void NextStep()
         {
-            if (m_activeStrategy == m_strategyPlayer1)
-                m_strategyPlayer1.MakeNextStep();
-            else
-                m_strategyPlayer2.MakeNextStep();
+            m_activeStrategy.MakeNextStep();
             m_lastStep = m_activeStrategy;
 
             switch (m_game.Status)
@@ -50,6 +51,14 @@ namespace FourInLineConsole.DataTypes
         private void ChangePlayer()
         {
             m_activeStrategy = m_activeStrategy == m_strategyPlayer1 ? m_strategyPlayer2 : m_strategyPlayer1;
+            OnChanged(new ChangedUserEvent(m_activeStrategy.Player));
+        }
+        protected virtual void OnChanged(INotificationEvent notificationEvent)
+        {
+            if (m_notificationService != null)
+            {
+                m_notificationService.RaiseEvent(notificationEvent);
+            }
         }
     }
 }

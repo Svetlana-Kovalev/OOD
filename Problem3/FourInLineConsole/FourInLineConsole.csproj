@@ -72,6 +72,7 @@
     <Compile Include="DataTypes\HumanConsoleStrategy.cs" />
     <Compile Include="DataTypes\HumanPlayer.cs" />
     <Compile Include="Infra\Infrastructure.cs" />
+    <Compile Include="Infra\NotificationService.cs" />
     <Compile Include="Infra\Wrapper.cs" />
     <Compile Include="Interfaces\Board\IBoard.cs" />
     <Compile Include="Interfaces\Board\IBoardViewer.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Interfaces\Infra\IGameInfrastructure.cs" />
     <Compile Include="Interfaces\Infra\ILogger.cs" />
     <Compile Include="Interfaces\Infra\ILoggerFactory.cs" />
+    <Compile Include="Interfaces\Infra\INotificationService.cs" />
     <Compile Include="Interfaces\Player\IComputerPlayer.cs" />
     <Compile Include="Interfaces\Board\IDisk.cs" />
     <Compile Include="Interfaces\IGame.cs" />

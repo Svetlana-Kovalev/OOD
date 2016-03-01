@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using FourInLineConsole.Interfaces;
+using FourInLineConsole.Interfaces.Infra;
 
 namespace FourInLineConsole.Infra
 {

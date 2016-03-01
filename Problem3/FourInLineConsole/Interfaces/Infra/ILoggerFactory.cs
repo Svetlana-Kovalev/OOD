@@ -1,4 +1,4 @@
-namespace FourInLineConsole.Interfaces
+namespace FourInLineConsole.Interfaces.Infra
 {
     public interface ILoggerFactory
     {
