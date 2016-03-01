@@ -57,9 +57,24 @@ Also created interface for board's presentation:
 Implemented class 
 ```public class ConsoleBoardViewer : IBoardViewer```
 which implements console board presentation. So, to change presentation it's enough to implement relevant class (from IBoardViewer).
-The approach satisfies SOLID principles: [Open/Closed principle] (https://en.wikipedia.org/wiki/Open/closed_principle), [Single Res[ponsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle)
+The approach satisfies SOLID principles: [Open/Closed principle] (https://en.wikipedia.org/wiki/Open/closed_principle), [Single Res[ponsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle).
 
 >3 It should be possible to add more types of computer players and the game might be configured to choose a particular level, for >example providing an easy, medium and strong computer player.
+
+Player classed (Human and Computer) don't contain implementation of strategy. Declared separated interface IStrategy
+```c#
+    public interface IStrategy
+    {
+        IGame Game { get; }
+        IPlayer Player { get; }
+        void MakeNextStep();
+    }
+```
+and different implementations:
+```c# public class HumanConsoleStrategy : IStrategy``` and ```c# public class ComputerStandardStrategy : IStrategy```
+Current implemented class ComputerStandardStrategy contains "computer strategy" from provided sample. Now, easy can be implemented any other strategies: each new strategy in new "strategy class" (```c# : IStrategy ```).
+At the beginning of the game will be created (by uer's choose or configuration) strategy class with relevant level.
+The approach satisfies SOLID principles: [Open/Closed principle] (https://en.wikipedia.org/wiki/Open/closed_principle), [Single Res[ponsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle).
 
 >4 The system should optimize memory usage. Pick up the one aspect of your design that has the best ratio in terms of memory saving (no >need to produce a fully optimized design).
 
