@@ -12,8 +12,6 @@ namespace FourInLineConsole.Infra
         private readonly int _maxSeconds;
         [NonSerialized]
         private CancellationTokenSource _cancelationTokenSource;
-        [NonSerialized] 
-        private Task _task;
         // Default constructor, invoked at build time.
         public TotalCurrentTurnAttribute()
         {
@@ -31,7 +29,7 @@ namespace FourInLineConsole.Infra
             _cancelationTokenSource = new CancellationTokenSource();
 
             var token = _cancelationTokenSource.Token;
-            _task = Task.Factory.StartNew(() =>
+            Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(_maxSeconds*S1);
             }, token).ContinueWith(t =>
