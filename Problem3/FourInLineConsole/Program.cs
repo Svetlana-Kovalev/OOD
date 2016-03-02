@@ -12,6 +12,7 @@ namespace FourInLineConsole
         {
             UnityContainer unityContainer = new UnityContainer();
             unityContainer.RegisterInstance<IGameInfrastructure>(new Infrastructure());
+            unityContainer.RegisterType<IGameConsole, GameConsole>();
             unityContainer.RegisterType<ILoggerFactory, FileLoggerFactory>();
             unityContainer.RegisterType<INotificationService, NotificationService>();
             unityContainer.RegisterType<IGameManager, ConsoleGameManager>();

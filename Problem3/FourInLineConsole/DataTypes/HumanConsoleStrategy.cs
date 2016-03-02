@@ -1,4 +1,5 @@
 ﻿using System;
+using FourInLineConsole.Infra;
 using FourInLineConsole.Interfaces;
 using FourInLineConsole.Interfaces.Infra;
 using FourInLineConsole.Interfaces.Player;
@@ -20,6 +21,7 @@ namespace FourInLineConsole.DataTypes
         #region IStrategy
         public IGame Game { get; private set; }
         public IPlayer Player { get { return m_player; } }
+        [TotalCurrentTurn(30)]
         public void MakeNextStep()
         {
             m_gameConsole.Write("Player {0}, choose a column: ", m_player.Name);
