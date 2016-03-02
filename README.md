@@ -197,3 +197,57 @@ Method **TryInvokeMember** catches calling of method **NextStep()** and stores t
             }
         }
 ```
+
+I use [Postsharp](https://www.postsharp.net/) framework to implement aspect, which produces warning when the total current turn is over 30 seconds (a value easily configurable). The value can be easy defined in atribute:
+```c#
+        [TotalCurrentTurn(30)]
+        public void MakeNextStep()
+        {
+            m_gameConsole.Write("Player {0}, choose a column: ", m_player.Name);
+            int column = Int32.Parse(m_gameConsole.ReadLine()); // no exception handling...
+            Game.PlaceDisk(m_player, column);
+        }
+```
+
+Attribute TotalCurrentTurn starts Task in **OnEntry** method and cancels it in **OnExit**.
+If task not cancelled during defined time, it will output warning.
+```c#
+    [Serializable]
+    public sealed class TotalCurrentTurnAttribute : OnMethodBoundaryAspect
+    {
+        const int S1 = 1000;
+        private readonly int _maxSeconds;
+        [NonSerialized]
+        private CancellationTokenSource _cancelationTokenSource;
+        
+        ...
+
+        // Constructor specifying the tracing category, invoked at build time.
+        public TotalCurrentTurnAttribute(int maxSeconds)
+        {
+            _maxSeconds = maxSeconds;
+        }
+
+        // Invoked at runtime before that target method is invoked.
+        public override void OnEntry(MethodExecutionArgs args)
+        {
+            _cancelationTokenSource = new CancellationTokenSource();
+
+            var token = _cancelationTokenSource.Token;
+            Task.Factory.StartNew(() =>
+            {
+                Thread.Sleep(_maxSeconds*S1);
+            }, token).ContinueWith(t =>
+            {
+                token.ThrowIfCancellationRequested();
+                Console.WriteLine("warning: current turn is over {0} seconds", _maxSeconds);
+            }, token);
+        }
+
+        // Invoked at runtime after the target method is invoked (in a finally block).
+        public override void OnExit(MethodExecutionArgs args)
+        {
+            _cancelationTokenSource.Cancel();       
+        }
+    }
+```
