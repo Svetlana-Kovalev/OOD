@@ -57,7 +57,7 @@ namespace FourInLineConsole.DataTypes
                     throw new ArgumentException(String.Format("Unexpected userChoice {0}", userChoice));
             }
 
-            m_boardViewer = new ConsoleBoardViewer(m_gameContainer.GetGame());
+            m_boardViewer = new ConsoleBoardViewer(m_gameContainer.GetGame(), m_gameConsole);
             m_gameContainer = Wrapper<IGameContainer>.Wrap<IGameContainer>(m_gameContainer, m_gameContainer, m_logger);
             
             return true;
@@ -96,9 +96,9 @@ namespace FourInLineConsole.DataTypes
             do
             {
                 PrintMenu();
-                string userChoiceAsString = Console.ReadLine();
+                string userChoiceAsString = m_gameConsole.ReadLine();
                 correctChoice = Int32.TryParse(userChoiceAsString, out userChoice);
-                correctChoice = correctChoice && (userChoice >= 0 && userChoice <= 2);
+                correctChoice = correctChoice && userChoice >= 0 && userChoice <= 2;
                 if (!correctChoice)
                     m_gameConsole.WriteLine("Input incorrect! Please try again.");
             } while (!correctChoice);

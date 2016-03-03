@@ -14,6 +14,10 @@ namespace FourInLineConsole.Infra
         {
             Console.WriteLine(format, parameters);
         }
+        public void WriteLine()
+        {
+            Console.WriteLine();
+        }
         public string ReadLine()
         {
             return Console.ReadLine();

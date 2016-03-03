@@ -4,6 +4,7 @@ namespace FourInLineConsole.Interfaces.Infra
     {
         void Write(string format, params object[] parameters);
         void WriteLine(string format, params object[] parameters);
+        void WriteLine();
         string ReadLine();
     }
 }
