@@ -64,7 +64,7 @@ namespace FourInLineConsole.DataTypes
         }
         public void Run()
         {
-            Console.WriteLine("Starting a game of 'Four in a Line'.");
+            m_gameConsole.WriteLine("Starting a game of 'Four in a Line'.");
             m_boardViewer.DisplayBoard();
 
             do
@@ -72,7 +72,7 @@ namespace FourInLineConsole.DataTypes
                 m_gameContainer.NextStep();
                 m_boardViewer.DisplayBoard();
             } while (m_gameContainer.GetGame().Status == BoardStatus.Active);
-            Console.WriteLine("Game completed.");
+            m_gameConsole.WriteLine("Game completed.");
 
             PrintFinalStatus();
         }
@@ -80,14 +80,14 @@ namespace FourInLineConsole.DataTypes
 
         private void PrintWelcome()
         {
-            Console.WriteLine("Welcome to Four in a Line!");
+            m_gameConsole.WriteLine("Welcome to Four in a Line!");
         }
         private void PrintMenu()
         {
-            Console.WriteLine((int)UserChoice.QUIT + ". Exit");
-            Console.WriteLine((int)UserChoice.PLAY + ". Play against a friend");
-            Console.WriteLine((int)UserChoice.PLAYCOMPUTER + ". Play against the computer");
-            Console.WriteLine("Please choose an option:");
+            m_gameConsole.WriteLine((int)UserChoice.QUIT + ". Exit");
+            m_gameConsole.WriteLine((int)UserChoice.PLAY + ". Play against a friend");
+            m_gameConsole.WriteLine((int)UserChoice.PLAYCOMPUTER + ". Play against the computer");
+            m_gameConsole.WriteLine("Please choose an option:");
         }
         private UserChoice GetUserChoice()
         {
@@ -100,7 +100,7 @@ namespace FourInLineConsole.DataTypes
                 correctChoice = Int32.TryParse(userChoiceAsString, out userChoice);
                 correctChoice = correctChoice && (userChoice >= 0 && userChoice <= 2);
                 if (!correctChoice)
-                    Console.WriteLine("Input incorrect! Please try again.");
+                    m_gameConsole.WriteLine("Input incorrect! Please try again.");
             } while (!correctChoice);
             return (UserChoice)userChoice;
         }
@@ -109,13 +109,12 @@ namespace FourInLineConsole.DataTypes
             switch (m_gameContainer.GetGame().Status)
             {
                 case BoardStatus.Finished:
-                    Console.WriteLine("Game has ended! Player '{0}' won!", m_gameContainer.GetActiveStrategy().Player.Name);
+                    m_gameConsole.WriteLine("Game has ended! Player '{0}' won!", m_gameContainer.GetActiveStrategy().Player.Name);
                     break;
                 case BoardStatus.Full:
-                    Console.WriteLine("Board is full! game has ended with a tie!");
+                    m_gameConsole.WriteLine("Board is full! game has ended with a tie!");
                     break;
-            }
-            
+            }            
         }
     }
 }
