@@ -1,5 +1,4 @@
 using System;
-using System.ComponentModel.Design.Serialization;
 using FourInLineConsole.DataTypes;
 using FourInLineConsole.Infra;
 using FourInLineConsole.Interfaces;
@@ -68,7 +67,7 @@ namespace FourInLineTests
         public void Init_Console2_True()
         {
             var mock = new Mock<IGameConsole>();
-            mock.Setup(f => f.ReadLine()).Returns("1");
+            mock.Setup(f => f.ReadLine()).Returns("2");
             var logMock = new Mock<ILogger>();
             var mockLoggerFactory = new Mock<ILoggerFactory>();
             mockLoggerFactory.Setup(f => f.Create()).Returns(logMock.Object);

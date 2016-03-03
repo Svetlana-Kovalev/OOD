@@ -1,7 +1,6 @@
 using System;
 using System.Diagnostics;
 using System.Dynamic;
-using System.Reflection;
 using FourInLineConsole.Interfaces;
 using FourInLineConsole.Interfaces.Infra;
 using ImpromptuInterface;
