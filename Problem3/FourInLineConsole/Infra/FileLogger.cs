@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using FourInLineConsole.Interfaces;
 using FourInLineConsole.Interfaces.Infra;
 
 namespace FourInLineConsole.DataTypes
