@@ -78,7 +78,30 @@ The approach satisfies SOLID principles: [Open/Closed principle] (https://en.wik
 
 >4 The system should optimize memory usage. Pick up the one aspect of your design that has the best ratio in terms of memory saving (no need to produce a fully optimized design).
 
-**TBD**
+Current implementation of class Board contains array[][] which stores status of each board's cell:
+```c#
+    public class Board : IBoard
+    {
+        private readonly IPlayer[][] m_board;
+   }
+```
+To optimize memory usage it's possible store value of cell and count of the cell by next way:
+```c#
+    public interface ICell
+    {
+       IPlayer Player;
+       int Counter;
+    }
+    public interface IBoardColumn
+    {
+        List<ICell> CellList { get; }
+    }
+    public class Board : IBoard
+    {
+        private readonly List<IBoardColumn> m_board;
+   }
+```
+It allows to reduce memory usage, but increases the time of operations with board.
 
 >5 It should be possible inform each user when it is his/her turn (by email/sms...)
 
