@@ -1,6 +1,5 @@
 using System;
 using FourInLineConsole.DataTypes;
-using FourInLineConsole.Infra;
 using FourInLineConsole.Interfaces;
 using FourInLineConsole.Interfaces.Board;
 using FourInLineConsole.Interfaces.Infra;
@@ -42,6 +41,21 @@ namespace FourInLineTests
             strategy.MakeNextStep();
 
             mock.Verify(f => f.Write("Player {0}, choose a column: ", humanPlayer.Name), Times.Once);
+        }
+
+        [Test]
+        public void NextIncorrectStep_Exception()
+        {
+            IHumanPlayer humanPlayer = new HumanPlayer("1");
+            var mock = new Mock<IGameConsole>();
+            mock.Setup(f => f.ReadLine()).Returns("-1");
+
+            IBoard board = new Board();
+            IPlayer otherPlayer = new HumanPlayer("other");
+            IGame game = new Game(board, humanPlayer, otherPlayer);
+            HumanConsoleStrategy strategy = new HumanConsoleStrategy(game, humanPlayer, mock.Object);
+
+            Assert.Throws<ArgumentException>(()=>strategy.MakeNextStep());            
         }
     }
 }

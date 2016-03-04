@@ -57,6 +57,7 @@
     <Compile Include="ConsoleBoardViewerTests.cs" />
     <Compile Include="ConsoleGameManagerTests.cs" />
     <Compile Include="FileLoggerFactoryTests.cs" />
+    <Compile Include="GameConsoleTests.cs" />
     <Compile Include="GameContainerTests.cs" />
     <Compile Include="GameTests.cs" />
     <Compile Include="HumanStrategyTests.cs" />

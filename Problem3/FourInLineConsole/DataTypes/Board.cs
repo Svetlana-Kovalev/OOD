@@ -55,6 +55,9 @@ namespace FourInLineConsole.DataTypes
         }
         public void PlaceDisk(IPlayer player, int columnIndex)
         {
+            if (columnIndex<0)
+                throw new ArgumentException();
+
             for (int i = Rows - 1; i >= 0; i--)
             {
                 if (m_board[i][columnIndex] == null)
