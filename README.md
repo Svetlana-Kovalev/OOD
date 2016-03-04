@@ -158,7 +158,8 @@ Unit tests implemented in separated project **FourInLineTests** with help of sev
 Moq allows to create required environment for unit testing without implementation "mock" classes or configure real classes.
 In several cases, added possibility to define settings of real classes, which uses by tests only. For example, added additional constructor of class Board **public Board(int rows, int cols)**, which allows to create "small" actual board and use it for tests.
 
-**TBD** It's necessary to add picture with "coverage" report.
+Test coverage report:
+![Test coverage report](https://github.com/Svetlana-Kovalev/OOD/blob/master/Problem3/Pictures/TestCoverageReport.png)
 
 **Aspects**
 
