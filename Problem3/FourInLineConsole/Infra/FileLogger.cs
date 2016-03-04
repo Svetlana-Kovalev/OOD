@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using FourInLineConsole.Interfaces.Infra;
 
-namespace FourInLineConsole.DataTypes
+namespace FourInLineConsole.Infra
 {
     public class FileLogger : ILogger
     {
