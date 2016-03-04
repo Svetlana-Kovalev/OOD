@@ -12,6 +12,7 @@ namespace FourInLineTests
             GameConsole console = new GameConsole();
             console.WriteLine("", null);
             console.WriteLine("");
+            console.WriteLine();
             console.Write("");
             Assert.Pass();
         }

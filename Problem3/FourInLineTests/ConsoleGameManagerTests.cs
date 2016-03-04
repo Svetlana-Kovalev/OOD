@@ -78,5 +78,34 @@ namespace FourInLineTests
 
             Assert.That(result, Is.True);
         }
+
+        [Test]
+        public void Run()
+        {
+            var mock = new Mock<IGameConsole>();
+            mock.SetupSequence(f => f.ReadLine())
+                .Returns("1")
+                .Returns("1")
+                .Returns("2")
+                .Returns("1")
+                .Returns("2")
+                .Returns("1")
+                .Returns("2")
+                .Returns("1")
+                .Returns("2");
+
+            var logMock = new Mock<ILogger>();
+            var mockLoggerFactory = new Mock<ILoggerFactory>();
+            mockLoggerFactory.Setup(f => f.Create()).Returns(logMock.Object);
+
+            INotificationService notificationService = new NotificationService(mock.Object);
+            var gameManager = new ConsoleGameManager(mockLoggerFactory.Object, notificationService, mock.Object);
+            gameManager.Init();
+            gameManager.Run();
+
+            mock.Verify(f => f.WriteLine("Starting a game of 'Four in a Line'."), Times.Once);
+            mock.Verify(f => f.WriteLine("Game completed."), Times.Once);
+            mock.Verify(f => f.WriteLine("Game has ended! Player '{0}' won!", "1"), Times.Once);
+        }
     }
 }
