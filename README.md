@@ -76,7 +76,7 @@ Current implemented class ComputerStandardStrategy contains "computer strategy" 
 At the beginning of the game will be created (by uer's choose or configuration) strategy class with relevant level.
 The approach satisfies SOLID principles: [Open/Closed principle] (https://en.wikipedia.org/wiki/Open/closed_principle), [Single Responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle).
 
->4 The system should optimize memory usage. Pick up the one aspect of your design that has the best ratio in terms of memory saving (no >need to produce a fully optimized design).
+>4 The system should optimize memory usage. Pick up the one aspect of your design that has the best ratio in terms of memory saving (no need to produce a fully optimized design).
 
 **TBD**
 
