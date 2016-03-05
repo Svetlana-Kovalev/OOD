@@ -76,9 +76,32 @@ Current implemented class ComputerStandardStrategy contains "computer strategy" 
 At the beginning of the game will be created (by uer's choose or configuration) strategy class with relevant level.
 The approach satisfies SOLID principles: [Open/Closed principle] (https://en.wikipedia.org/wiki/Open/closed_principle), [Single Responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle).
 
->4 The system should optimize memory usage. Pick up the one aspect of your design that has the best ratio in terms of memory saving (no >need to produce a fully optimized design).
+>4 The system should optimize memory usage. Pick up the one aspect of your design that has the best ratio in terms of memory saving (no need to produce a fully optimized design).
 
-**TBD**
+Current implementation of class Board contains array[][] which stores status of each board's cell:
+```c#
+    public class Board : IBoard
+    {
+        private readonly IPlayer[][] m_board;
+   }
+```
+To optimize memory usage it's possible store value of cell and count of the cell by next way:
+```c#
+    public interface ICell
+    {
+       IPlayer Player;
+       int Counter;
+    }
+    public interface IBoardColumn
+    {
+        List<ICell> CellList { get; }
+    }
+    public class Board : IBoard
+    {
+        private readonly List<IBoardColumn> m_board;
+   }
+```
+It allows to reduce memory usage, but increases the time of operations with board.
 
 >5 It should be possible inform each user when it is his/her turn (by email/sms...)
 
@@ -158,7 +181,9 @@ Unit tests implemented in separated project **FourInLineTests** with help of sev
 Moq allows to create required environment for unit testing without implementation "mock" classes or configure real classes.
 In several cases, added possibility to define settings of real classes, which uses by tests only. For example, added additional constructor of class Board **public Board(int rows, int cols)**, which allows to create "small" actual board and use it for tests.
 
-**TBD** It's necessary to add picture with "coverage" report.
+Test coverage report:
+
+![Test coverage report](https://github.com/Svetlana-Kovalev/OOD/blob/master/Problem3/Pictures/TestCoverageReport.png)
 
 **Aspects**
 
