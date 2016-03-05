@@ -41,9 +41,6 @@ namespace FourInLineConsole.Infra
                     stopWatch.Start();
                 }
 
-//                //do stuff here
-//                Console.WriteLine("wrapper <before>");
-
                 //call _wrappedObject object
                 result = m_wrappedObject.GetType().GetMethod(binder.Name).Invoke(m_wrappedObject, args);
 
@@ -53,9 +50,6 @@ namespace FourInLineConsole.Infra
                     TimeSpan ts = stopWatch.Elapsed;
                     m_logger.Info("elapsed time: player={0}, duration = {1} ms", m_gameGameContainer.GetLastStep().Player.Name, ts.TotalMilliseconds);
                 }
-
-//                Console.WriteLine("wrapper <after>");
-//
                 return true;
             }
             catch

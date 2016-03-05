@@ -55,15 +55,6 @@ namespace FourInLineConsole.DataTypes
                         counter++; // we found a winning disc
                         chosenrow = i; // remember the row
                     }
-
-//                    board[emptyrow][i] = OPLAYER; // assume the other player does this
-//                    if (winningDisk(board, emptyrow, i))
-//                    {
-//                        Game.Board[emptyrow, i] = null; // reset
-//                        counter++; // we found a winning disc
-//                        chosenrow = i; // remember the row
-//                    }
-//                    Game.Board[emptyrow, i] = null; // reset
                 }
             }
             // we block the player if there is exactly one winning disc 
